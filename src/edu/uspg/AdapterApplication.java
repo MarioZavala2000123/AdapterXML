@@ -46,26 +46,6 @@ public class AdapterApplication {
 
     public static void main(String[] args) {
         menuPrincipal();
-        
-         // Creo una instancia de DocumentBuilderFactory
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            // Creo un documentBuilder
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            // Creo un DOMImplementation
-            DOMImplementation implementation = builder.getDOMImplementation();
-            
-             Source source = new DOMSource(documento);
-        
-        // Creo un documento con un elemento raiz
-             Document documento = implementation.createDocument(null, "AlumnosXML", null);
-            documento.setXmlVersion("1.0");
-            
-            // Creo el Result, indicado que fichero se va a crear
-            Result result = new StreamResult(new File("concesionario.xml"));
-
-            // Creo un transformer, se crea el fichero XML
-            Transformer transformer = TransformerFactory.newInstance().newTransformer();
-            transformer.transform(source, result);
     }
 
     public static void agregarAlumno() {
@@ -119,6 +99,7 @@ public class AdapterApplication {
 
                     System.out.println("\t---Datos XML---");
                     objectToXML(alumno);
+                    documento();
                     //listObjectTOXML(listaAlumno);
 
                     break;
@@ -195,62 +176,43 @@ public class AdapterApplication {
             Document documento = implementation.createDocument(null, "AlumnosXML", null);
             documento.setXmlVersion("1.0");
 
-            /*
-             matricula.appendChild(textMatricula);
-             coche.appendChild(matricula);
-            */
-            
             // Creo los elementos
-            Element coches = documento.createElement("coches");
-            Element coche = documento.createElement("coche");
+            Element alumnosxml = documento.createElement("alumnosxml");
+            Element alumnoxml = documento.createElement("alumnoxml");
 
-            // Matricula
-            Element matricula = documento.createElement("matricula");
-            Text textMatricula = documento.createTextNode("1111AAA");
-            matricula.appendChild(textMatricula);
-            coche.appendChild(matricula);
+            // nombres
+            Element nombres = documento.createElement("nombres");
+            Text textNombres = documento.createTextNode(alumno.getNombres());
+            nombres.appendChild(textNombres);
+            alumnoxml.appendChild(nombres);
 
             // Marca
             Element marca = documento.createElement("marca");
             Text textMarca = documento.createTextNode("AUDI");
             marca.appendChild(textMarca);
-            coche.appendChild(marca);
+            alumnoxml.appendChild(marca);
 
             // Precio
             Element precio = documento.createElement("precio");
             Text textPrecio = documento.createTextNode("30000");
             precio.appendChild(textPrecio);
-            coche.appendChild(precio);
+            alumnoxml.appendChild(precio);
 
             // Añado al elemento coches el elemento coche
-            coches.appendChild(coche);
+            alumnosxml.appendChild(alumnoxml);
 
             // Añado al root el elemento coches
-            documento.getDocumentElement().appendChild(coches);
+            documento.getDocumentElement().appendChild(alumnosxml);
 
             // Asocio el source con el Document
             Source source = new DOMSource(documento);
             // Creo el Result, indicado que fichero se va a crear
-            Result result = new StreamResult(new File("concesionario.xml"));
+            Result result = new StreamResult(new File("AlumnosXML.xml"));
 
             // Creo un transformer, se crea el fichero XML
             Transformer transformer = TransformerFactory.newInstance().newTransformer();
             transformer.transform(source, result);
 
-            /*
-            // Creo un documento con un elemento raiz
-             Document documento = implementation.createDocument(null, "AlumnosXML", null);
-            documento.setXmlVersion("1.0");
-            
-            // Creo el Result, indicado que fichero se va a crear
-            Result result = new StreamResult(new File("concesionario.xml"));
-
-            // Creo un transformer, se crea el fichero XML
-            Transformer transformer = TransformerFactory.newInstance().newTransformer();
-            transformer.transform(source, result);
-
-            */
-            
         } catch (ParserConfigurationException | TransformerException ex) {
             System.out.println(ex.getMessage());
         }
