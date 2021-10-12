@@ -180,23 +180,30 @@ public class AdapterApplication {
             Element alumnosxml = documento.createElement("alumnosxml");
             Element alumnoxml = documento.createElement("alumnoxml");
 
+            /*
+           // carnet
+            Element carnet = documento.createElement("carnet");
+            Text textCarnet = documento.createTextNode(alumno.getCarnet());
+            carnet.appendChild(textCarnet);
+            alumnoxml.appendChild(carnet);
+            */
             // nombres
             Element nombres = documento.createElement("nombres");
             Text textNombres = documento.createTextNode(alumno.getNombres());
             nombres.appendChild(textNombres);
             alumnoxml.appendChild(nombres);
 
-            // Marca
-            Element marca = documento.createElement("marca");
-            Text textMarca = documento.createTextNode("AUDI");
-            marca.appendChild(textMarca);
-            alumnoxml.appendChild(marca);
+            // apellidos
+            Element apellidos = documento.createElement("apellidos");
+            Text textApellidos = documento.createTextNode(alumno.getApellidos());
+            apellidos.appendChild(textApellidos);
+            alumnoxml.appendChild(apellidos);
 
             // Precio
-            Element precio = documento.createElement("precio");
-            Text textPrecio = documento.createTextNode("30000");
-            precio.appendChild(textPrecio);
-            alumnoxml.appendChild(precio);
+            Element correo = documento.createElement("correo");
+            Text textCorreo = documento.createTextNode(alumno.getCorreo());
+            correo.appendChild(textCorreo);
+            alumnoxml.appendChild(correo);
 
             // Añado al elemento coches el elemento coche
             alumnosxml.appendChild(alumnoxml);
