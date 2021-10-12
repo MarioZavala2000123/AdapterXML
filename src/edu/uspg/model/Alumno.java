@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Alumno {
 
-    int carnet;
+    String carnet;
     String nombres;
     String apellidos;
     String correo;
@@ -21,7 +21,7 @@ public class Alumno {
         super();
     }
 
-    public Alumno(int carnet, String nombres, String apellidos, String correo) {
+    public Alumno(String carnet, String nombres, String apellidos, String correo) {
         super();
         this.carnet = carnet;
         this.nombres = nombres;
@@ -29,12 +29,12 @@ public class Alumno {
         this.correo = correo;
     }
 
-    public int getCarnet() {
+    public String getCarnet() {
         return carnet;
     }
 
     @XmlAttribute
-    public void setCarnet(int carnet) {
+    public void setCarnet(String carnet) {
         this.carnet = carnet;
     }
 

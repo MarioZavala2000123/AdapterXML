@@ -33,7 +33,7 @@ import org.w3c.dom.Text;
 
 public class AdapterApplication {
 
-    static int carnet;
+    static String carnet;
     static String nombres;
     static String apellidos;
     static String correo;
@@ -54,7 +54,7 @@ public class AdapterApplication {
 
         System.out.println("   Ingrese carnet: ");
         System.out.print(" -");
-        carnet = scn.nextInt();
+        carnet = scn.next();
 
         System.out.println("   Ingrese nombre: ");
         System.out.print(" -");
@@ -180,13 +180,13 @@ public class AdapterApplication {
             Element alumnosxml = documento.createElement("alumnosxml");
             Element alumnoxml = documento.createElement("alumnoxml");
 
-            /*
+            
            // carnet
             Element carnet = documento.createElement("carnet");
             Text textCarnet = documento.createTextNode(alumno.getCarnet());
             carnet.appendChild(textCarnet);
             alumnoxml.appendChild(carnet);
-            */
+            
             // nombres
             Element nombres = documento.createElement("nombres");
             Text textNombres = documento.createTextNode(alumno.getNombres());
