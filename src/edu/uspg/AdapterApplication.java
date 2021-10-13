@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.uspg;
 
 import java.io.StringWriter;
@@ -165,18 +160,18 @@ public class AdapterApplication {
 
     public static void documento() {
         try {
-            // Creo una instancia de DocumentBuilderFactory
+            
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            // Creo un documentBuilder
+            
             DocumentBuilder builder = factory.newDocumentBuilder();
-            // Creo un DOMImplementation
+            
             DOMImplementation implementation = builder.getDOMImplementation();
 
-            // Creo un documento con un elemento raiz
+            
             Document documento = implementation.createDocument(null, "AlumnosXML", null);
             documento.setXmlVersion("1.0");
 
-            // Creo los elementos
+            
             Element alumnosxml = documento.createElement("alumnosxml");
             Element alumnoxml = documento.createElement("alumnoxml");
 
@@ -205,18 +200,18 @@ public class AdapterApplication {
             correo.appendChild(textCorreo);
             alumnoxml.appendChild(correo);
 
-            // Añado al elemento coches el elemento coche
+            
             alumnosxml.appendChild(alumnoxml);
 
-            // Añado al root el elemento coches
+            
             documento.getDocumentElement().appendChild(alumnosxml);
 
-            // Asocio el source con el Document
+            
             Source source = new DOMSource(documento);
-            // Creo el Result, indicado que fichero se va a crear
+            
             Result result = new StreamResult(new File("AlumnosXML.xml"));
 
-            // Creo un transformer, se crea el fichero XML
+            
             Transformer transformer = TransformerFactory.newInstance().newTransformer();
             transformer.transform(source, result);
 
