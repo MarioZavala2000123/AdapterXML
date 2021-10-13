@@ -94,7 +94,7 @@ public class AdapterApplication {
 
                     System.out.println("\t---Datos XML---");
                     objectToXML(alumno);
-                    documento();
+                    documentoXML();
                     //listObjectTOXML(listaAlumno);
 
                     break;
@@ -158,30 +158,33 @@ public class AdapterApplication {
 
     }
 
-    public static void documento() {
+    public static void documentoXML() {
         try {
-            
+
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            
+
             DocumentBuilder builder = factory.newDocumentBuilder();
-            
+
             DOMImplementation implementation = builder.getDOMImplementation();
 
-            
-            Document documento = implementation.createDocument(null, "AlumnosXML", null);
+            String DocNombre;
+
+            System.out.println("Por favor escriba el nombre para el documento:");
+            System.out.print("- ");
+            DocNombre = scn.next();
+
+            Document documento = implementation.createDocument(null, DocNombre, null);
             documento.setXmlVersion("1.0");
 
-            
             Element alumnosxml = documento.createElement("alumnosxml");
             Element alumnoxml = documento.createElement("alumnoxml");
 
-            
-           // carnet
+            // carnet
             Element carnet = documento.createElement("carnet");
             Text textCarnet = documento.createTextNode(alumno.getCarnet());
             carnet.appendChild(textCarnet);
             alumnoxml.appendChild(carnet);
-            
+
             // nombres
             Element nombres = documento.createElement("nombres");
             Text textNombres = documento.createTextNode(alumno.getNombres());
@@ -200,18 +203,14 @@ public class AdapterApplication {
             correo.appendChild(textCorreo);
             alumnoxml.appendChild(correo);
 
-            
             alumnosxml.appendChild(alumnoxml);
 
-            
             documento.getDocumentElement().appendChild(alumnosxml);
 
-            
             Source source = new DOMSource(documento);
-            
-            Result result = new StreamResult(new File("AlumnosXML.xml"));
 
-            
+            Result result = new StreamResult(new File(DocNombre + ".xml"));
+
             Transformer transformer = TransformerFactory.newInstance().newTransformer();
             transformer.transform(source, result);
 
