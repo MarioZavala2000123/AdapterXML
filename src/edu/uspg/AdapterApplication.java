@@ -175,13 +175,7 @@ public class AdapterApplication {
 
             DOMImplementation implementation = builder.getDOMImplementation();
 
-            String DocNombre;
-
-            System.out.println("Por favor escriba el nombre para el documento:");
-            System.out.print("- ");
-            DocNombre = scn.next();
-
-            Document documento = implementation.createDocument(null, DocNombre, null);
+            Document documento = implementation.createDocument(null, "Alumnoxml", null);
             documento.setXmlVersion("1.0");
 
             Element alumnosxml = documento.createElement("alumnosxml");
@@ -217,7 +211,7 @@ public class AdapterApplication {
 
             Source source = new DOMSource(documento);
 
-            Result result = new StreamResult(new File(DocNombre + ".xml"));
+            Result result = new StreamResult(new File("Alumnoxml" + ".xml"));
 
             Transformer transformer = TransformerFactory.newInstance().newTransformer();
             transformer.transform(source, result);
@@ -227,14 +221,14 @@ public class AdapterApplication {
         }
 
     }
-    
-     public static void Json(ArrayList<Alumno> listaAlumno){
-        
+
+    public static void Json(ArrayList<Alumno> listaAlumno) {
+
         JSONObject obj = new JSONObject();
         JSONArray array = new JSONArray();
-        
-        for(int i = 0 ; i < listaAlumno.size() ; i++){
-            
+
+        for (int i = 0; i < listaAlumno.size(); i++) {
+
             JSONObject obj1 = new JSONObject();
             obj1.put("carnet", listaAlumno.get(i).getCarnet());
             obj1.put("Nombre", listaAlumno.get(i).getNombres());
@@ -242,19 +236,18 @@ public class AdapterApplication {
             obj1.put("Correo", listaAlumno.get(i).getCorreo());
             array.add(obj1);
         }
-        
+
         obj.put("Nombres", array);
-        
+
         System.out.println(obj);
-        
-        
-        
+
         try (BufferedWriter bw = new BufferedWriter(new FileWriter("datos_persona.json"))) {
             bw.write(nombres);
             System.out.println("Fichero creado");
         } catch (IOException ex) {
             Logger.getLogger(AdapterApplication.class.getName()).log(Level.SEVERE, null, ex);
         }
-   
+
     }
+
 }
