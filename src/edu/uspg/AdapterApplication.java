@@ -10,7 +10,12 @@ import javax.xml.bind.Marshaller;
 
 import edu.uspg.model.ListaAlumnos;
 import edu.uspg.model.Alumno;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -21,6 +26,8 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -102,6 +109,7 @@ public class AdapterApplication {
                 case 3:
 
                     System.out.println("\t---Datos JSON---");
+                    Json(listaAlumno);
 
             }
 
@@ -218,5 +226,35 @@ public class AdapterApplication {
             System.out.println(ex.getMessage());
         }
 
+    }
+    
+     public static void Json(ArrayList<Alumno> listaAlumno){
+        
+        JSONObject obj = new JSONObject();
+        JSONArray array = new JSONArray();
+        
+        for(int i = 0 ; i < listaAlumno.size() ; i++){
+            
+            JSONObject obj1 = new JSONObject();
+            obj1.put("carnet", listaAlumno.get(i).getCarnet());
+            obj1.put("Nombre", listaAlumno.get(i).getNombres());
+            obj1.put("Apellido", listaAlumno.get(i).getApellidos());
+            obj1.put("Correo", listaAlumno.get(i).getCorreo());
+            array.add(obj1);
+        }
+        
+        obj.put("Nombres", array);
+        
+        System.out.println(obj);
+        
+        
+        
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("datos_persona.json"))) {
+            bw.write(nombres);
+            System.out.println("Fichero creado");
+        } catch (IOException ex) {
+            Logger.getLogger(AdapterApplication.class.getName()).log(Level.SEVERE, null, ex);
+        }
+   
     }
 }
