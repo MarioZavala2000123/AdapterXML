@@ -242,7 +242,7 @@ public class AdapterApplication {
         System.out.println(obj);
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter("datos_persona.json"))) {
-            bw.write(nombres);
+            bw.write(obj.toString());
             System.out.println("Fichero creado");
         } catch (IOException ex) {
             Logger.getLogger(AdapterApplication.class.getName()).log(Level.SEVERE, null, ex);
